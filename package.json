@@ -1,10 +1,14 @@
 {
   "name": "mini-react",
   "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
     "test": "vitest"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
+    "vite": "^6.1.1",
     "vitest": "^3.0.8"
   },
   "prettier": {
