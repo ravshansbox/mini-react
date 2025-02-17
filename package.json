@@ -1,7 +1,11 @@
 {
   "name": "mini-react",
+  "scripts": {
+    "start": "vite"
+  },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "vite": "^6.2.1"
   },
   "prettier": {
     "singleQuote": true
