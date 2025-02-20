@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "jsxFactory": "createElement",
+    "jsxImportSource": "@/lib",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
