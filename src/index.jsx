@@ -1,8 +1,9 @@
-import { createElement } from '@/lib';
+import { createElement, createRoot } from '@/lib';
 
 const element = (
   <h1 id="message">
     Hello, <i>World</i>
   </h1>
 );
-console.log(element);
+
+createRoot(document.getElementById('root')).render(element);
