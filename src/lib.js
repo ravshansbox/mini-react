@@ -16,6 +16,10 @@ export const createTextNode = (nodeValue) => {
 
 const isDomProp = (key) => key !== 'children';
 
+const EVENT_REGEXP = /^on([A-Z]+)$/;
+const isEventProp = (key) => EVENT_REGEXP.test(key);
+const getEventName = (key) => EVENT_REGEXP.exec(key)?.[1].toLowerCase();
+
 const render = (container, element) => {
   const domElement =
     element.type === 'TEXT_NODE'
@@ -23,8 +27,11 @@ const render = (container, element) => {
       : document.createElement(element.type);
 
   for (const [key, value] of Object.entries(element.props)) {
-    if (!isDomProp(key)) continue;
-    domElement[key] = value;
+    if (isEventProp(key)) {
+      domElement.addEventListener(getEventName(key), value);
+    } else if (isDomProp(key)) {
+      domElement[key] = value;
+    }
   }
 
   for (const child of element.props.children) {
