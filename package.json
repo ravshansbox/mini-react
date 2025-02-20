@@ -1,3 +1,9 @@
 {
-  "name": "mini-react"
+  "name": "mini-react",
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
 }
