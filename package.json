@@ -1,7 +1,11 @@
 {
   "name": "mini-react",
+  "scripts": {
+    "test": "vitest"
+  },
   "devDependencies": {
-    "prettier": "^3.5.1"
+    "prettier": "^3.5.1",
+    "vitest": "^3.0.6"
   },
   "prettier": {
     "singleQuote": true
