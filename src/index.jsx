@@ -6,10 +6,22 @@ const createTextNode = (text) => {
   return document.createTextNode(text);
 };
 
+const isEvent = (prop) => {
+  return /^on[A-Z]/.test(prop);
+};
+
+const propToEvent = (prop) => {
+  return prop.match(/^on(.+)$/)[1].toLowerCase();
+};
+
 const createElementNode = ({ type, props: { children, ...props } }) => {
   const domElement = document.createElement(type);
   for (const prop in props) {
-    domElement[prop] = props[prop];
+    if (isEvent(prop)) {
+      domElement.addEventListener(propToEvent(prop), props[prop]);
+    } else {
+      domElement[prop] = props[prop];
+    }
   }
   for (const child of children) {
     render(domElement, child);
@@ -31,4 +43,8 @@ const createRoot = (domElement) => {
   };
 };
 
-createRoot(document.getElementById('root')).render(<h1 id="message">Hello</h1>);
+createRoot(document.getElementById('root')).render(
+  <h1 id="message" onClick={console.log}>
+    Hello
+  </h1>,
+);
