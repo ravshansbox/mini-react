@@ -30,11 +30,15 @@ const createElementNode = ({ type, props: { children, ...props } }) => {
 };
 
 const render = (domElement, vdomNode) => {
-  domElement.appendChild(
-    ['string', 'number', 'boolean'].includes(typeof vdomNode)
-      ? createTextNode(vdomNode)
-      : createElementNode(vdomNode),
-  );
+  if (typeof vdomNode.type === 'function') {
+    render(domElement, vdomNode.type(vdomNode.props));
+  } else {
+    domElement.appendChild(
+      ['string', 'number', 'boolean'].includes(typeof vdomNode)
+        ? createTextNode(vdomNode)
+        : createElementNode(vdomNode),
+    );
+  }
 };
 
 const createRoot = (domElement) => {
@@ -43,8 +47,12 @@ const createRoot = (domElement) => {
   };
 };
 
-createRoot(document.getElementById('root')).render(
-  <h1 id="message" onClick={console.log}>
-    Hello
-  </h1>,
-);
+const App = () => {
+  return (
+    <h1 id="message" onClick={console.log}>
+      Hello
+    </h1>
+  );
+};
+
+createRoot(document.getElementById('root')).render(<App />);
