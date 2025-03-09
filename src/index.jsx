@@ -6,9 +6,12 @@ const createTextNode = (text) => {
   return document.createTextNode(text);
 };
 
-const createElementNode = ({ type, props }) => {
+const createElementNode = ({ type, props: { children, ...props } }) => {
   const domElement = document.createElement(type);
-  for (const child of props.children) {
+  for (const prop in props) {
+    domElement[prop] = props[prop];
+  }
+  for (const child of children) {
     render(domElement, child);
   }
   return domElement;
